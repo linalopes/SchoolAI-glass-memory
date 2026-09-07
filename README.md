@@ -8,7 +8,7 @@ The electronics stay visible: TRRS cables run across the glass, a custom control
 
 ![Glass Memory installation](glass-memory.webp)
 
-
+https://github.com/user-attachments/assets/acf82029-6c34-4761-a3db-518c1ffbd78a
 
 ---
 
@@ -29,15 +29,6 @@ The visitor sees a glass pane with five hand-shaped stations, a red 32×8 LED ma
 Repeated presses of the same direction count as separate events, as long as the hand is lifted in between. Only Start is accepted while idle; only the four directions are accepted during a turn.
 
 `Start → countdown → watch lamps → GO → repeat → OK → longer sequence`
-
-
-
-<video width="100%" controls>
-  <source src="./glass-memory.mp4" type="video/mp4">
-</video>
-
-▶️ [Watch the installation video](glass-memory.mp4)
-
 
 ---
 
