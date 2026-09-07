@@ -8,9 +8,11 @@ The electronics stay visible: TRRS cables run across the glass, a custom control
 
 ![Glass Memory installation](glass-memory.webp)
 
-TODO: add an installation video to the repository root and link it here. No MP4 is present in this repo at the time of writing.
+
 
 ---
+
+
 
 ## How it works
 
@@ -28,7 +30,18 @@ Repeated presses of the same direction count as separate events, as long as the 
 
 `Start → countdown → watch lamps → GO → repeat → OK → longer sequence`
 
+
+
+<video width="100%" controls>
+  <source src="./glass-memory.mp4" type="video/mp4">
+</video>
+
+▶️ [Watch the installation video](glass-memory.mp4)
+
+
 ---
+
+
 
 ## System overview
 
@@ -48,22 +61,26 @@ The controller reads five analog sensor channels, decides when a hand is present
 
 ---
 
+
+
 ## Hardware
 
 The running firmware and the KiCad controller project both target a **SparkFun Pro Micro C** (ATmega32U4, [product 15795](https://www.sparkfun.com/products/15795)), socketed on the custom board.
 
 The schematic title block still says “ESP32-S3 controller”. That comment is leftover. The symbol, footprint, pin map, and firmware all use the Pro Micro.
 
-| Role | What is in this repo | Purpose |
-| --- | --- | --- |
-| Controller | SparkFun Pro Micro C on the [glass-memory](kicad%20files/glass-memory/) PCB | Runs calibration or game firmware |
-| Sensor jacks | Five **PJ-320A** TRRS sockets (START, UP, DOWN, LEFT, RIGHT) | Detachable cable to each hand |
-| Sensor adapters | Five [sensor-trrs-adapter-pj320a](kicad%20files/sensor-trrs-adapter-pj320a/) boards | PJ-320A jack to a 1×4 sensor header |
-| Sensors | Five analog channels; 4-pin modules with **A0 / D0 / GND / VCC** on the adapter silkscreen | Detect a hand over each station |
-| Display | External **MAX7219** 4-in-1 matrix (`FC16_HW`, 4 devices → 32×8) | Status text and numbers |
-| Relays | External **4-channel relay module**, active LOW | Switch the four direction lamps |
-| Power | 2-pin screw terminal **J8**, “5V Power Source” (pin 1 GND, pin 2 +5V) | 5 V rail shared with the Pro Micro `5V` pin |
-| Mechanics | Laser-cut hands / board, 3D-printed hand support and matrix bezel | Physical stations on the glass |
+
+| Role            | What is in this repo                                                                       | Purpose                                     |
+| --------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------- |
+| Controller      | SparkFun Pro Micro C on the [glass-memory](kicad%20files/glass-memory/) PCB                | Runs calibration or game firmware           |
+| Sensor jacks    | Five **PJ-320A** TRRS sockets (START, UP, DOWN, LEFT, RIGHT)                               | Detachable cable to each hand               |
+| Sensor adapters | Five [sensor-trrs-adapter-pj320a](kicad%20files/sensor-trrs-adapter-pj320a/) boards        | PJ-320A jack to a 1×4 sensor header         |
+| Sensors         | Five analog channels; 4-pin modules with **A0 / D0 / GND / VCC** on the adapter silkscreen | Detect a hand over each station             |
+| Display         | External **MAX7219** 4-in-1 matrix (`FC16_HW`, 4 devices → 32×8)                           | Status text and numbers                     |
+| Relays          | External **4-channel relay module**, active LOW                                            | Switch the four direction lamps             |
+| Power           | 2-pin screw terminal **J8**, “5V Power Source” (pin 1 GND, pin 2 +5V)                      | 5 V rail shared with the Pro Micro `5V` pin |
+| Mechanics       | Laser-cut hands / board, 3D-printed hand support and matrix bezel                          | Physical stations on the glass              |
+
 
 The exact sensor part number is not named in the repository. Firmware comments treat the readings as optical (a slow “ambient optical drift” tracker). The adapter exposes both analog (**A0** / `AO`) and digital (**D0** / `DO`) pins; **only analog is used** by the firmware.
 
@@ -73,24 +90,28 @@ The installation photograph shows filament lamps at the four direction stations.
 
 Verified in both [glass-memory-game.ino](glass-memory-game/glass-memory-game.ino) and [glass-memory-calibration-eeprom.ino](glass-memory-calibration-eeprom/glass-memory-calibration-eeprom.ino), and matched on the Pro Micro footprint in the PCB.
 
-| Function | Pin |
-| --- | --- |
-| START sensor | A10 |
-| UP sensor | A9 |
-| DOWN sensor | A8 |
-| LEFT sensor | A0 |
-| RIGHT sensor | A7 |
-| Relay IN1 (UP) | D5 |
-| Relay IN2 (DOWN) | D4 |
-| Relay IN3 (LEFT) | D3 |
-| Relay IN4 (RIGHT) | D2 |
-| MAX7219 DIN | D15 |
-| MAX7219 CS | D14 |
-| MAX7219 CLK | D16 |
+
+| Function          | Pin |
+| ----------------- | --- |
+| START sensor      | A10 |
+| UP sensor         | A9  |
+| DOWN sensor       | A8  |
+| LEFT sensor       | A0  |
+| RIGHT sensor      | A7  |
+| Relay IN1 (UP)    | D5  |
+| Relay IN2 (DOWN)  | D4  |
+| Relay IN3 (LEFT)  | D3  |
+| Relay IN4 (RIGHT) | D2  |
+| MAX7219 DIN       | D15 |
+| MAX7219 CS        | D14 |
+| MAX7219 CLK       | D16 |
+
 
 Relays are **active LOW** (`RELAY_ON = LOW`). START has no relay.
 
 ---
+
+
 
 ## Custom electronics
 
@@ -116,16 +137,20 @@ Silkscreen: *TRRS PJ-320A 1×4 ADAPTER*. Schematic comment: *PJ-320A TRRS jack �
 
 One adapter sits at each hand. Board size in the gerber job is **24.6 × 15.1 mm**. The 1×4 header (J1) is:
 
-| Pin | Net | Back silk |
-| --- | --- | --- |
-| 1 | `AO` | `A0` |
-| 2 | `DO` | `D0` |
-| 3 | `GND` | `GND` |
-| 4 | `3V3` | `VCC` |
+
+| Pin | Net   | Back silk |
+| --- | ----- | --------- |
+| 1   | `AO`  | `A0`      |
+| 2   | `DO`  | `D0`      |
+| 3   | `GND` | `GND`     |
+| 4   | `3V3` | `VCC`     |
+
 
 Gerbers: [kicad files/sensor-trrs-adapter-pj320a/production/](kicad%20files/sensor-trrs-adapter-pj320a/production/).
 
 ---
+
+
 
 ## Sensor cabling
 
@@ -133,12 +158,14 @@ TRRS (PJ-320A, 3.5 mm 4-pole) is used so each hand can be a remote node: power, 
 
 The table below follows the **PCB copper** on both boards (and the matching gerbers), using the custom [TRRS-PJ-320A](kicad%20files/glass-memory/TRRS-PJ-320A.pretty/TRRS-PJ-320A.kicad_mod) footprint labels.
 
-| TRRS contact | Symbol pin | Controller PCB | Adapter PCB |
-| --- | --- | --- | --- |
-| Sleeve | S / pad 1 | `GND` | `GND` |
-| Tip | T / pad 2 | not connected | `DO` (digital out) |
-| Ring 1 | R1 / pad 3 | `+5V` | net labeled `3V3` / silk `VCC` |
-| Ring 2 | R2 / pad 4 | analog `*_A0` | `AO` |
+
+| TRRS contact | Symbol pin | Controller PCB | Adapter PCB                    |
+| ------------ | ---------- | -------------- | ------------------------------ |
+| Sleeve       | S / pad 1  | `GND`          | `GND`                          |
+| Tip          | T / pad 2  | not connected  | `DO` (digital out)             |
+| Ring 1       | R1 / pad 3 | `+5V`          | net labeled `3V3` / silk `VCC` |
+| Ring 2       | R2 / pad 4 | analog `*_A0`  | `AO`                           |
+
 
 The controller uses **three** conductors. Tip is unused on the hub, so the sensor digital output is not read.
 
@@ -148,6 +175,8 @@ The controller uses **three** conductors. Tip is unused on the hub, so the senso
 2. The hub puts **+5 V** on Ring 1. The adapter net for that same contact is named **3V3**. Confirm the sensor module’s supply rating before applying power. TODO: document the intended sensor supply and module part number.
 
 ---
+
+
 
 ## Sensors
 
@@ -164,6 +193,8 @@ During a player turn the RAM baseline slowly follows ambient optical drift (ever
 The game firmware latches one accepted sensor until *that same* sensor releases, so LEFT → LEFT is two events if the hand lifts in between.
 
 ---
+
+
 
 ## Calibration
 
@@ -207,11 +238,13 @@ The write is read back immediately (`EEPROM SAVE: OK` or `ERROR`). Values persis
 
 After SAVE, the sketch stays in TEST. An accepted sensor lights its relay (except START) and draws a marker on the matrix (center / top / bottom / left / right edge). Serial prints all five `filtered/score%` values twice a second, tagged `[ACTIVE]`, `[CAND]`, or `[--]`.
 
-Send **`P`** on Serial to reprint the calibration table.
+Send `P` on Serial to reprint the calibration table.
 
 Then upload the game sketch. Do not recalibrate unless the mounting or lighting changed.
 
 ---
+
+
 
 ## Firmware
 
@@ -233,31 +266,39 @@ V4 responsibilities:
 
 ---
 
+
+
 ## Display
 
 A four-module MAX7219 chain (`MD_MAX72XX::FC16_HW`, intensity 3). Firmware maps pixels with **X reversed** and **Y normal** (`physicalCol = 31 − logicalCol`) so the physical panel matches the intended left-to-right text.
 
-| When | Matrix shows |
-| --- | --- |
-| Idle | `START` |
-| Missing calibration | `CAL` (then halt) |
-| New game | `3` `2` `1` |
-| Before playback | round length as a number |
-| Sequence playback | blank |
-| Player turn | `GO` |
-| Round correct | `OK` |
-| Wrong hand | `WR`, then the score |
-| Timeout | `TO`, then the score |
+
+| When                | Matrix shows             |
+| ------------------- | ------------------------ |
+| Idle                | `START`                  |
+| Missing calibration | `CAL` (then halt)        |
+| New game            | `3` `2` `1`              |
+| Before playback     | round length as a number |
+| Sequence playback   | blank                    |
+| Player turn         | `GO`                     |
+| Round correct       | `OK`                     |
+| Wrong hand          | `WR`, then the score     |
+| Timeout             | `TO`, then the score     |
+
 
 The 3D-printed [MAX7219 bezel](3D%20print%20files/glass_memory_max7219_beze.scad) is a rear-entry frame for a 32×8 assembly (~131 mm wide including inter-module gaps).
 
 ---
+
+
 
 ## Relays and lights
 
 Four channels, active LOW, mapped as IN1–IN4 above. During computer playback each step turns on exactly one lamp. During the player turn the matching lamp stays on while that hand remains present (if player feedback is enabled). START never drives a relay. All relays are forced off between steps, on error, and in idle.
 
 ---
+
+
 
 ## Building the system
 
@@ -275,12 +316,15 @@ Laser-cut hands and board: [laser cut files](laser%20cut%20files/) (72 dpi SVG, 
 
 ---
 
+
+
 ## Repository structure
 
 ```text
 .
 ├── README.md
 ├── glass-memory.webp                          installation photograph
+├── glass-memory.mp4                           installation video
 ├── glass-memory-game/                         game firmware V4
 │   └── glass-memory-game.ino
 ├── glass-memory-calibration-eeprom/           EEPROM calibration + live TEST
@@ -296,25 +340,31 @@ KiCad local history and zip backups exist under the hardware folders; they are s
 
 ---
 
+
+
 ## Troubleshooting
 
 Drawn from the diagnostic paths that actually exist in firmware.
 
-| Symptom | What the firmware is telling you |
-| --- | --- |
-| Matrix stuck on `CAL` | EEPROM magic/version/checksum failed, or a stored delta is ~0. Run calibration and confirm `EEPROM SAVE: OK`. |
-| Start does nothing, directions work (or the reverse) | Wrong TRRS jack, or the allowed-sensor mask: idle listens only to START; play listens only to the four directions. |
-| One press counted twice, or LEFT cannot follow LEFT | The hand never returned below the 30% release score for 120 ms. Check Serial scores in the calibration TEST. |
-| Wrong lamp or two lamps | Winner margin is 10%. If two sensors both cross 50%, no winner is taken. Recalibrate with only one hand in place. |
-| Resting scores creep up after a while | Expected: game tracks ambient drift in RAM only. If a real touch no longer reaches ~100%, recalibrate. |
-| Display text mirrored | Firmware already reverses X for this panel. If it looks wrong, the module order or `FC16_HW` wiring does not match this build. |
-| Relays on when they should be off | Modules are active LOW. Confirm the board is not treating IN as active HIGH. |
-| `TO` during play | 10 s to make the next press, or 5 s to release. |
-| Calibration deltas tiny | Baseline and hand samples were too similar. Repeat CLEAR with the pane empty, then place the hand fully over that station. |
+
+| Symptom                                              | What the firmware is telling you                                                                                               |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Matrix stuck on `CAL`                                | EEPROM magic/version/checksum failed, or a stored delta is ~0. Run calibration and confirm `EEPROM SAVE: OK`.                  |
+| Start does nothing, directions work (or the reverse) | Wrong TRRS jack, or the allowed-sensor mask: idle listens only to START; play listens only to the four directions.             |
+| One press counted twice, or LEFT cannot follow LEFT  | The hand never returned below the 30% release score for 120 ms. Check Serial scores in the calibration TEST.                   |
+| Wrong lamp or two lamps                              | Winner margin is 10%. If two sensors both cross 50%, no winner is taken. Recalibrate with only one hand in place.              |
+| Resting scores creep up after a while                | Expected: game tracks ambient drift in RAM only. If a real touch no longer reaches ~100%, recalibrate.                         |
+| Display text mirrored                                | Firmware already reverses X for this panel. If it looks wrong, the module order or `FC16_HW` wiring does not match this build. |
+| Relays on when they should be off                    | Modules are active LOW. Confirm the board is not treating IN as active HIGH.                                                   |
+| `TO` during play                                     | 10 s to make the next press, or 5 s to release.                                                                                |
+| Calibration deltas tiny                              | Baseline and hand samples were too similar. Repeat CLEAR with the pane empty, then place the hand fully over that station.     |
+
 
 Serial (both sketches, 115200) prints per-sensor scores when debug is on. Calibration TEST is the right place to watch `base` / `hand` / `delta` / `noise`.
 
 ---
+
+
 
 ## Software requirements
 
@@ -325,6 +375,8 @@ Serial (both sketches, 115200) prints per-sensor scores when debug is on. Calibr
 
 ---
 
+
+
 ## Glass Memory web app
 
 This repository does not contain a web app, simulator, or networked companion. The installation runs entirely on the Pro Micro.
@@ -332,6 +384,8 @@ This repository does not contain a web app, simulator, or networked companion. T
 TODO: link a companion app here if it lives in another repo.
 
 ---
+
+
 
 ## About the project
 
@@ -342,6 +396,8 @@ The work sits in physical computing — analog optical sensing, a visible cable 
 PCB silkscreen: *heavily inspired by Nathan Rabinovitch*. No exhibition history is recorded in this repository.
 
 ---
+
+
 
 ## Credits
 
