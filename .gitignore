@@ -1,0 +1,62 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Arduino / avr-gcc build artifacts
+build/
+*.hex
+*.eep
+*.elf
+*.lst
+*.lss
+*.map
+*.sym
+*.bin
+*.o
+*.d
+*.a
+
+# Arduino IDE / CLI
+*.ino.cpp
+libraries.properties
+
+# PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# OpenSCAD
+*.scad~
+
+# Affinity Designer backups
+*.af.bak
+*.af~
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~.nib
+
+# Cursor
+.cursor/
+
+# Secrets and local env
+.env
+.env.*
+*.pem
+*.key
+secrets.*
