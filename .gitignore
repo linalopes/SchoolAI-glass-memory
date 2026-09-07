@@ -54,6 +54,15 @@ libraries.properties
 # Cursor
 .cursor/
 
+# KiCad
+*-backups/
+.history/
+*.kicad_prl
+*.kicad_pro-bak
+fp-info-cache
+*.lck
+**/production/OLD/
+
 # Secrets and local env
 .env
 .env.*

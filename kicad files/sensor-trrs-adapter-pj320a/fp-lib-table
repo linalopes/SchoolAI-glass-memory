@@ -1,0 +1,4 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "TRRS-PJ-320A") (type "KiCad") (uri "${KIPRJMOD}/TRRS-PJ-320A.pretty") (options "") (descr ""))
+)
